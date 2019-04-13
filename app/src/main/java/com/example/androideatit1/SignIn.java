@@ -18,7 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class SignIn extends AppCompatActivity {
 
-    EditText edtPhone,edtPassword;
+    EditText edtEmail,edtPassword;
     Button btnSignIn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +27,7 @@ public class SignIn extends AppCompatActivity {
 
         //what is material edit text??
         this.edtPassword = (EditText)findViewById(R.id.edtPassword);
-        this.edtPhone = (EditText)findViewById(R.id.edtPhone);
+        this.edtEmail = (EditText)findViewById(R.id.edtEmail);
         this.btnSignIn = (Button)findViewById(R.id.btnSignIn);
 
         //Init Firebase
@@ -49,12 +49,12 @@ public class SignIn extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot)
                     {
                         //Check if user not exist in database
-                        if(dataSnapshot.child(edtPhone.getText().toString()).exists())
+                        if(dataSnapshot.child(edtEmail.getText().toString()).exists())
                         {
                             //Get User Information
                             mDialog.dismiss();
                             User user =
-                                    dataSnapshot.child(edtPhone.getText().toString()).getValue(User.class);
+                                    dataSnapshot.child(edtEmail.getText().toString()).getValue(User.class);
                             if(user.getPassword().equals(edtPassword.getText().toString()))
                             {
                                 Toast.makeText(SignIn.this,"Sign in successfully!!",

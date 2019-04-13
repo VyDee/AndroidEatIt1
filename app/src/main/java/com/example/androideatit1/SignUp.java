@@ -19,15 +19,16 @@ import com.google.firebase.database.ValueEventListener;
 
 public class SignUp extends AppCompatActivity {
 
-    EditText edtPhone,edtName,edtPassword;
+    EditText edtEmail,edtName,edtPassword;
     Button btnSignUp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
+
         this.edtName = (EditText)findViewById(R.id.edtName);
-        this.edtPhone = (EditText)findViewById(R.id.edtPhone);
+        this.edtEmail = (EditText)findViewById(R.id.edtEmail);
         this.edtPassword = (EditText)findViewById(R.id.edtPassword);
 
         this.btnSignUp = (Button)findViewById(R.id.btnSignUp);
@@ -47,7 +48,7 @@ public class SignUp extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         //Check if already user Phone
-                        if(dataSnapshot.child(edtPhone.getText().toString()).exists())
+                        if(dataSnapshot.child(edtEmail.getText().toString()).exists())
                         {
                             mDialog.dismiss();
                             Toast.makeText(SignUp.this,"Phone Number already register",
@@ -59,7 +60,7 @@ public class SignUp extends AppCompatActivity {
                             mDialog.dismiss();
                             User user = new User(edtName.getText().toString(),
                                     edtPassword.getText().toString());
-                            table_user.child(edtPhone.getText().toString()).setValue(user);
+                            table_user.child(edtEmail.getText().toString()).setValue(user);
                             Toast.makeText(SignUp.this,"Sign up successfully!",
                                     Toast.LENGTH_SHORT).show();
                             finish();
